@@ -20,6 +20,42 @@ body{
   -ms-transform: translateY(-30%);
 }
 
+@media only screen and (max-width: 600px) {
+  #App{
+    display: block;
+    position: relative;
+  }
+  
+  #canvas{
+    width: 100vw;
+    height: 60vh;
+  }
+  
+  #content{
+    text-align: center;
+    width: 100vw;
+    height: 40vh;
+    margin-top: 25px;
+    transform: translateY(0%);
+    -ms-transform: translateY(-0%);
+  }
+
+  #content p, #content h1{
+    max-width: 80%;
+    margin: 10px auto;
+  }
+
+  #buttons{
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  #buttons #light{
+    margin: 10px auto;
+  }
+}
+
+
 
 .portfolio{
   display: flex;

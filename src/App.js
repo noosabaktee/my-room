@@ -50,11 +50,13 @@ function App() {
       <div id="content">
         <h1>{body[pos].title}</h1>
         <p style={{fontSize: "20px"}}>{body[pos].content}</p>
-        <div style={{display: "flex"}}>
-            <button disabled={pos <= 0} onClick={() => {setPos(pos-1)}}><span className="material-symbols-outlined">arrow_left_alt</span> Back</button>
-            <button disabled={pos >= 7} onClick={() => {setPos(pos+1)}} style={{marginLeft: "10px"}}>Next <span className="material-symbols-outlined">arrow_right_alt</span></button>
+        <div id='buttons'>
+          <div style={{display: "flex"}}>
+              <button disabled={pos <= 0} onClick={() => {setPos(pos-1)}}><span className="material-symbols-outlined">arrow_left_alt</span> Back</button>
+              <button disabled={pos >= 7} onClick={() => {setPos(pos+1)}} style={{marginLeft: "10px"}}>Next <span className="material-symbols-outlined">arrow_right_alt</span></button>
+          </div>
+          <button onClick={turnOn} id='light'>Turn {isTurnOn ? 'Off' : 'On'} Light <span className="material-symbols-outlined">emoji_objects</span></button>
         </div>
-        <button onClick={turnOn}>Turn {isTurnOn ? 'Off' : 'On'} Light <span className="material-symbols-outlined">emoji_objects</span></button>
       </div>
     </div>
   )
