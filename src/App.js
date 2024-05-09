@@ -2,11 +2,13 @@ import { Canvas } from '@react-three/fiber'
 import Model from './Model'
 import { useState } from 'react';
 import './App.css'
+import { useProgress } from '@react-three/drei'
 
 import { Camera } from './Camera';
 
 
 function App() {
+  const { progress } = useProgress()
   const d = new Date();
   let year = d.getFullYear();
   const body = [
@@ -28,7 +30,7 @@ function App() {
   const turnOn = () => {
     if(!isTurnOn){
       setPoinIntensity(0)
-      setDirectionalIntensity(1)
+      setDirectionalIntensity(2)
       setIsTurnOn(true)
     }else{
       setPoinIntensity(5)
@@ -36,7 +38,6 @@ function App() {
       setIsTurnOn(false)
     }
   }
-  
   return (
     <div id="App">
       <div id="canvas">
@@ -47,17 +48,24 @@ function App() {
           <directionalLight color="white" position={[5, 11, 9]} intensity={directionalIntensity}/>
         </Canvas>
       </div>
-      <div id="content">
-        <h1>{body[pos].title}</h1>
-        <p style={{fontSize: "20px"}}>{body[pos].content}</p>
-        <div id='buttons'>
-          <div style={{display: "flex"}}>
-              <button disabled={pos <= 0} onClick={() => {setPos(pos-1)}}><span className="material-symbols-outlined">arrow_left_alt</span> Back</button>
-              <button disabled={pos >= 7} onClick={() => {setPos(pos+1)}} style={{marginLeft: "10px"}}>Next <span className="material-symbols-outlined">arrow_right_alt</span></button>
-          </div>
-          <button onClick={turnOn} id='light'>Turn {isTurnOn ? 'Off' : 'On'} Light <span className="material-symbols-outlined">emoji_objects</span></button>
+      {progress < 100 &&
+        <div id='loading'>
+          <h3>loading......</h3>
         </div>
-      </div>
+      }
+      {progress >= 100 &&
+        <div id="content">
+          <h1>{body[pos].title}</h1>
+          <p style={{fontSize: "20px"}}>{body[pos].content}</p>
+          <div id='buttons'>
+            <div style={{display: "flex"}}>
+                <button disabled={pos <= 0} onClick={() => {setPos(pos-1)}}><span className="material-symbols-outlined">arrow_left_alt</span> Back</button>
+                <button disabled={pos >= 7} onClick={() => {setPos(pos+1)}} style={{marginLeft: "10px"}}>Next <span className="material-symbols-outlined">arrow_right_alt</span></button>
+            </div>
+            <button onClick={turnOn} id='light'>Turn {isTurnOn ? 'Off' : 'On'} Light <span className="material-symbols-outlined">emoji_objects</span></button>
+          </div>
+        </div>
+      }
     </div>
   )
 }
